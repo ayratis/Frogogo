@@ -44,6 +44,7 @@
                     android:id="@+id/firstNameEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    style="@style/EditTextMain"
                     android:hint="@string/first_name"
                     android:inputType="textCapWords|textPersonName"
                     android:nextFocusDown="@id/secondNameEditText" />
@@ -61,6 +62,7 @@
                     android:id="@+id/secondNameEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    style="@style/EditTextMain"
                     android:hint="@string/second_name"
                     android:inputType="textCapWords|textPersonName"
                     android:nextFocusDown="@id/emailEditText" />
@@ -79,6 +81,7 @@
                     android:id="@+id/emailEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    style="@style/EditTextMain"
                     android:hint="@string/email"
                     android:inputType="textEmailAddress"/>
 

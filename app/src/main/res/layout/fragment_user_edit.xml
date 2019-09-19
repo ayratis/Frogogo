@@ -44,6 +44,7 @@
                     android:id="@+id/firstNameEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    style="@style/EditTextMain"
                     android:hint="@string/first_name"
                     android:inputType="textCapWords|textPersonName"
                     android:nextFocusDown="@id/secondNameEditText" />
@@ -60,6 +61,7 @@
                 <EditText
                     android:id="@+id/secondNameEditText"
                     android:layout_width="match_parent"
+                    style="@style/EditTextMain"
                     android:layout_height="wrap_content"
                     android:hint="@string/second_name"
                     android:inputType="textCapWords|textPersonName"
@@ -77,6 +79,7 @@
 
                 <EditText
                     android:id="@+id/emailEditText"
+                    style="@style/EditTextMain"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/email"

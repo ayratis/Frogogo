@@ -8,6 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.NoActionBar.Splash">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -17,6 +21,13 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="EditTextMain" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">@color/textAccentColor</item>
+    </style>
+
+    <style name="TextViewMain" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/textAccentColor</item>
+    </style>
 
 
 </resources>

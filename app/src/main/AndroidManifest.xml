@@ -16,8 +16,9 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".ui.AppActivity"
+            android:launchMode="singleInstance"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

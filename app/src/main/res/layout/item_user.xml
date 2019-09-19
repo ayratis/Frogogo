@@ -7,12 +7,13 @@
     android:id="@+id/userContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    card_view:cardCornerRadius="4dp"
-    card_view:cardElevation="4dp"
+    card_view:cardCornerRadius="2dp"
+    card_view:cardElevation="2dp"
     card_view:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:background="?attr/selectableItemBackground"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
@@ -29,10 +30,10 @@
 
         <TextView
             android:id="@+id/nameTextView"
+            style="@style/TextViewMain"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:textColor="@android:color/black"
             android:textSize="18sp"
             android:layout_marginStart="16dp"
             android:maxLines="1"
@@ -46,11 +47,11 @@
 
         <TextView
             android:id="@+id/emailTextView"
+            style="@style/TextViewMain"
             android:layout_marginTop="2dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:textColor="@android:color/black"
             android:textSize="14sp"
             android:maxLines="1"
             android:layout_marginStart="16dp"
