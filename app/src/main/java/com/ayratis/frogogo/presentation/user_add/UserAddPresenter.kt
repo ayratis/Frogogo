@@ -4,7 +4,8 @@ import com.arellomobile.mvp.InjectViewState
 import com.ayratis.frogogo.R
 import com.ayratis.frogogo.presentation._base.BasePresenter
 import com.ayratis.frogogo.repository.UserAddRepository
-import com.ayratis.frogogo.system.EmailValidatorProvider
+import com.ayratis.frogogo.system.ErrorHandler
+import com.ayratis.frogogo.system.email_validation.EmailValidatorProvider
 import com.ayratis.frogogo.system.ResourceManager
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
@@ -14,7 +15,8 @@ class UserAddPresenter @Inject constructor(
     private val userAddRepository: UserAddRepository,
     private val router: Router,
     private val emailValidar: EmailValidatorProvider,
-    private val resourceManager: ResourceManager
+    private val resourceManager: ResourceManager,
+    private val errorHandler: ErrorHandler
 ) : BasePresenter<UserAddView>() {
 
     private var firstName: String = ""
@@ -41,9 +43,10 @@ class UserAddPresenter @Inject constructor(
                         viewState.showLoadingProgress(false)
                         viewState.showSuccessDialog()
                     },
-                    {
+                    { error ->
                         viewState.enableUi(true)
                         viewState.showLoadingProgress(false)
+                        errorHandler.proceed(error) { viewState.showMessage(it) }
                     }
                 ).connect()
         }

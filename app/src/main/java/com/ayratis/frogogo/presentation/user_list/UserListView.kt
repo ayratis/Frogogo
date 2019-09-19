@@ -10,4 +10,5 @@ interface UserListView : MvpView {
 
     fun showLoading(show: Boolean)
     fun setUsersList(users: List<User>)
+    fun showMessage(message: String?)
 }

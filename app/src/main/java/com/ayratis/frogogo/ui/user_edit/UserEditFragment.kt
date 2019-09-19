@@ -17,6 +17,7 @@ import com.ayratis.frogogo.extension.onTextChanges
 import com.ayratis.frogogo.presentation.user_edit.UserEditPresenter
 import com.ayratis.frogogo.presentation.user_edit.UserEditView
 import com.ayratis.frogogo.ui._base.BaseFragment
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_user_edit.*
 import toothpick.Scope
 import toothpick.config.Module
@@ -116,6 +117,13 @@ class UserEditFragment : BaseFragment(), UserEditView {
             }
             .create()
             .show()
+    }
+
+    override fun showMessage(message: String?) {
+        if (message == null) return
+        view?.run {
+            Snackbar.make(this, message, Snackbar.LENGTH_LONG).show()
+        }
     }
 
     companion object {

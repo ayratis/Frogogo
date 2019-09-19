@@ -10,6 +10,7 @@ import com.ayratis.frogogo.presentation.user_list.UserListPresenter
 import com.ayratis.frogogo.presentation.user_list.UserListView
 import com.ayratis.frogogo.ui._base.BaseFragment
 import com.ayratis.frogogo.ui.adapter.UserListAdapter
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_user_list.*
 
 class UserListFragment : BaseFragment(), UserListView {
@@ -43,6 +44,13 @@ class UserListFragment : BaseFragment(), UserListView {
 
     override fun setUsersList(users: List<User>) {
         userListAdapter.setItems(users)
+    }
+
+    override fun showMessage(message: String?) {
+        if (message == null) return
+        view?.run {
+            Snackbar.make(this, message, Snackbar.LENGTH_LONG).show()
+        }
     }
 
 }

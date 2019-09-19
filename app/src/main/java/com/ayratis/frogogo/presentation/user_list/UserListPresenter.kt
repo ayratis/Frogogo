@@ -5,13 +5,15 @@ import com.ayratis.frogogo.Screens
 import com.ayratis.frogogo.entity.User
 import com.ayratis.frogogo.presentation._base.BasePresenter
 import com.ayratis.frogogo.repository.UserListRepository
+import com.ayratis.frogogo.system.ErrorHandler
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
 @InjectViewState
 class UserListPresenter @Inject constructor(
     private val userListRepository: UserListRepository,
-    private val router: Router
+    private val router: Router,
+    private val errorHandler: ErrorHandler
 ): BasePresenter<UserListView>() {
 
     override fun onFirstViewAttach() {
@@ -41,8 +43,9 @@ class UserListPresenter @Inject constructor(
                     viewState.setUsersList(users)
                     viewState.showLoading(false)
                 },
-                {
+                { error ->
                     viewState.showLoading(false)
+                    errorHandler.proceed(error) { viewState.showMessage(it) }
                 }
             ).connect()
     }

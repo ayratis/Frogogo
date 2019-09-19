@@ -22,4 +22,5 @@ interface UserEditView : MvpView {
     fun enableUi(enable: Boolean)
     fun hideKeyboard()
     fun showSuccessDialog()
+    fun showMessage(message: String?)
 }

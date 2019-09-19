@@ -7,6 +7,10 @@ import com.ayratis.frogogo.di.BaseUrl
 import com.ayratis.frogogo.di.provider.ApiProvider
 import com.ayratis.frogogo.di.provider.OkHttpClientProvider
 import com.ayratis.frogogo.system.*
+import com.ayratis.frogogo.system.email_validation.EmailValidator
+import com.ayratis.frogogo.system.email_validation.EmailValidatorProvider
+import com.ayratis.frogogo.system.rx.AppSchedulers
+import com.ayratis.frogogo.system.rx.SchedulersProvider
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import ru.terrakok.cicerone.Cicerone
@@ -32,6 +36,8 @@ class AppModule(context: Context) : Module() {
         bind(Api::class.java).toProvider(ApiProvider::class.java).providesSingletonInScope()
 
         //utils
-        bind(EmailValidatorProvider::class.java).toInstance(EmailValidator())
+        bind(EmailValidatorProvider::class.java).toInstance(
+            EmailValidator()
+        )
     }
 }

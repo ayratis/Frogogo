@@ -13,4 +13,6 @@
     <string name="success_add_message">Пользователь успешно добавлен!</string>
     <string name="success_edit_message">Пользователь успешно редактирован!</string>
     <string name="ok">OK</string>
+    <string name="network_error">Нет подключения к сети</string>
+    <string name="unknown_error">Неизвестная ошибка</string>
 </resources>

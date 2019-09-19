@@ -11,6 +11,7 @@ import com.ayratis.frogogo.extension.onTextChanges
 import com.ayratis.frogogo.presentation.user_add.UserAddPresenter
 import com.ayratis.frogogo.presentation.user_add.UserAddView
 import com.ayratis.frogogo.ui._base.BaseFragment
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_user_add.*
 
 class UserAddFragment : BaseFragment(), UserAddView {
@@ -90,5 +91,12 @@ class UserAddFragment : BaseFragment(), UserAddView {
             }
             .create()
             .show()
+    }
+
+    override fun showMessage(message: String?) {
+        if (message == null) return
+        view?.run {
+            Snackbar.make(this, message, Snackbar.LENGTH_LONG).show()
+        }
     }
 }

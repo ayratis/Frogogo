@@ -1,4 +1,4 @@
-package com.ayratis.frogogo.system
+package com.ayratis.frogogo.system.rx
 
 import io.reactivex.Scheduler
 

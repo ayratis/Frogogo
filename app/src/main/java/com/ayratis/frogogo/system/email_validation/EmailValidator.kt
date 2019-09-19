@@ -1,4 +1,4 @@
-package com.ayratis.frogogo.system
+package com.ayratis.frogogo.system.email_validation
 
 class EmailValidator : EmailValidatorProvider {
     override fun isEmailValid(email: String): Boolean {

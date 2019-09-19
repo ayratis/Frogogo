@@ -6,7 +6,8 @@ import com.ayratis.frogogo.di.UserToEdit
 import com.ayratis.frogogo.entity.User
 import com.ayratis.frogogo.presentation._base.BasePresenter
 import com.ayratis.frogogo.repository.UserEditRepository
-import com.ayratis.frogogo.system.EmailValidatorProvider
+import com.ayratis.frogogo.system.ErrorHandler
+import com.ayratis.frogogo.system.email_validation.EmailValidatorProvider
 import com.ayratis.frogogo.system.ResourceManager
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
@@ -17,7 +18,8 @@ class UserEditPresenter @Inject constructor(
     private val userEditRepository: UserEditRepository,
     private val router: Router,
     private val resourceManager: ResourceManager,
-    private val emailValidator: EmailValidatorProvider
+    private val emailValidator: EmailValidatorProvider,
+    private val errorHandler: ErrorHandler
 ): BasePresenter<UserEditView>() {
 
     private var firstName: String = user.firstName
@@ -50,9 +52,10 @@ class UserEditPresenter @Inject constructor(
                         viewState.showLoadingProgress(false)
                         viewState.showSuccessDialog()
                     },
-                    {
+                    { error ->
                         viewState.enableUi(true)
                         viewState.showLoadingProgress(false)
+                        errorHandler.proceed(error) { viewState.showMessage(it) }
                     }
                 ).connect()
         }
