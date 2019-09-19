@@ -34,6 +34,7 @@ class UserListFragment : BaseFragment(), UserListView {
             adapter = userListAdapter
         }
         swipeRefreshLayout.setOnRefreshListener { presenter.onRefresh() }
+        addFab.setOnClickListener { presenter.onAddFabClick() }
     }
 
     override fun showLoading(show: Boolean) {

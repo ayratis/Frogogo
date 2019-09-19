@@ -7,4 +7,15 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface UserAddView : MvpView {
 
+    enum class Line {
+        FIRST_NAME,
+        SECOND_NAME,
+        EMAIL
+    }
+
+    fun showValidationError(line: Line, show: Boolean, message: String? = null)
+    fun showLoadingProgress(show: Boolean)
+    fun enableUi(enable: Boolean)
+    fun hideKeyboard()
+
 }

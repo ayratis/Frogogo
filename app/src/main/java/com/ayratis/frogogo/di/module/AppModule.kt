@@ -6,8 +6,7 @@ import com.ayratis.frogogo.data.Api
 import com.ayratis.frogogo.di.BaseUrl
 import com.ayratis.frogogo.di.provider.ApiProvider
 import com.ayratis.frogogo.di.provider.OkHttpClientProvider
-import com.ayratis.frogogo.system.AppSchedulers
-import com.ayratis.frogogo.system.SchedulersProvider
+import com.ayratis.frogogo.system.*
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import ru.terrakok.cicerone.Cicerone
@@ -21,6 +20,7 @@ class AppModule(context: Context) : Module() {
         bind(String::class.java).withName(BaseUrl::class.java).toInstance(BuildConfig.BASE_URL)
         bind(SchedulersProvider::class.java).toInstance(AppSchedulers())
         bind(Gson::class.java).toInstance(Gson())
+        bind(ResourceManager::class.java).singletonInScope()
 
         //navigation
         val cicerone = Cicerone.create()
@@ -30,5 +30,8 @@ class AppModule(context: Context) : Module() {
         //network
         bind(OkHttpClient::class.java).toProvider(OkHttpClientProvider::class.java).providesSingletonInScope()
         bind(Api::class.java).toProvider(ApiProvider::class.java).providesSingletonInScope()
+
+        //utils
+        bind(EmailValidatorProvider::class.java).toInstance(EmailValidator())
     }
 }

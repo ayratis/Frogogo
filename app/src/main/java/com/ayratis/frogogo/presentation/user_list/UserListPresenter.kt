@@ -1,14 +1,17 @@
 package com.ayratis.frogogo.presentation.user_list
 
 import com.arellomobile.mvp.InjectViewState
+import com.ayratis.frogogo.Screens
 import com.ayratis.frogogo.entity.User
 import com.ayratis.frogogo.presentation._base.BasePresenter
 import com.ayratis.frogogo.repository.UserListRepository
+import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
 @InjectViewState
 class UserListPresenter @Inject constructor(
-    private val userListRepository: UserListRepository
+    private val userListRepository: UserListRepository,
+    private val router: Router
 ): BasePresenter<UserListView>() {
 
     override fun onFirstViewAttach() {
@@ -22,6 +25,10 @@ class UserListPresenter @Inject constructor(
 
     fun onItemClick(user: User) {
 
+    }
+
+    fun onAddFabClick() {
+        router.navigateTo(Screens.UserAdd)
     }
 
     private fun loadUsers() {

@@ -1,10 +1,90 @@
 package com.ayratis.frogogo.presentation.user_add
 
 import com.arellomobile.mvp.InjectViewState
+import com.ayratis.frogogo.R
 import com.ayratis.frogogo.presentation._base.BasePresenter
+import com.ayratis.frogogo.repository.UserAddRepository
+import com.ayratis.frogogo.system.EmailValidatorProvider
+import com.ayratis.frogogo.system.ResourceManager
+import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
 @InjectViewState
-class UserAddPresenter @Inject constructor(): BasePresenter<UserAddView>() {
+class UserAddPresenter @Inject constructor(
+    private val userAddRepository: UserAddRepository,
+    private val router: Router,
+    private val emailValidar: EmailValidatorProvider,
+    private val resourceManager: ResourceManager
+) : BasePresenter<UserAddView>() {
+
+    fun onAcceptClick(firstName: String, secondName: String, email: String) {
+
+        val isFirstNameValid = isFirstNameValid(firstName)
+        val isSecondNameValid = isSecondNameValid(secondName)
+        val isEmailValid = isEmailValid(email)
+
+        if (isFirstNameValid && isSecondNameValid && isEmailValid) {
+            userAddRepository.addUser(firstName, secondName, email)
+                .doOnSubscribe {
+                    viewState.enableUi(false)
+                    viewState.showLoadingProgress(true)
+                }
+                .subscribe(
+                    {
+                        viewState.enableUi(true)
+                        viewState.showLoadingProgress(false)
+                    },
+                    {
+                        viewState.enableUi(true)
+                        viewState.showLoadingProgress(false)
+                    }
+                ).connect()
+        }
+    }
+
+    fun onBackPressed() {
+        router.exit()
+    }
+
+    private fun isFirstNameValid(firstName: String?): Boolean {
+        return if (firstName.isNullOrEmpty()) {
+            viewState.showValidationError(
+                UserAddView.Line.FIRST_NAME,
+                true,
+                resourceManager.getString(R.string.should_not_be_empty)
+            )
+            false
+        } else {
+            viewState.showValidationError(UserAddView.Line.FIRST_NAME, false)
+            true
+        }
+    }
+
+    private fun isSecondNameValid(secondName: String?): Boolean {
+        return if (secondName.isNullOrEmpty()) {
+            viewState.showValidationError(
+                UserAddView.Line.SECOND_NAME,
+                true,
+                resourceManager.getString(R.string.should_not_be_empty)
+            )
+            false
+        } else {
+            viewState.showValidationError(UserAddView.Line.SECOND_NAME, false)
+            true
+        }
+    }
+    private fun isEmailValid(email: String): Boolean {
+        return if (!emailValidar.isEmailValid(email)) {
+            viewState.showValidationError(
+                UserAddView.Line.EMAIL,
+                true,
+                resourceManager.getString(R.string.email_validation_error)
+            )
+            false
+        } else {
+            viewState.showValidationError(UserAddView.Line.EMAIL, false)
+            true
+        }
+    }
 
 }
