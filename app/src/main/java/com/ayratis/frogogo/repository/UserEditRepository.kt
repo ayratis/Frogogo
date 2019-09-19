@@ -10,10 +10,9 @@ import javax.inject.Inject
 
 class UserEditRepository @Inject constructor(
     private val api: Api,
-    private val schedulers: SchedulersProvider,
-    @UserId private val id: Long
+    private val schedulers: SchedulersProvider
 ) {
-    fun editUser(firstName: String, secondName: String, email: String): Single<User> =
+    fun editUser(id: Long, firstName: String, secondName: String, email: String): Single<User> =
         api
             .editUser(
                 id,
