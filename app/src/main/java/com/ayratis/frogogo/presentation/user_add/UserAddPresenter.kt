@@ -17,7 +17,13 @@ class UserAddPresenter @Inject constructor(
     private val resourceManager: ResourceManager
 ) : BasePresenter<UserAddView>() {
 
-    fun onAcceptClick(firstName: String, secondName: String, email: String) {
+    private var firstName: String = ""
+    private var secondName: String = ""
+    private var email: String = ""
+
+    fun onAcceptClick() {
+
+        viewState.hideKeyboard()
 
         val isFirstNameValid = isFirstNameValid(firstName)
         val isSecondNameValid = isSecondNameValid(secondName)
@@ -44,6 +50,21 @@ class UserAddPresenter @Inject constructor(
 
     fun onBackPressed() {
         router.exit()
+    }
+
+    fun onFirstNameChanged(firstName: String) {
+        this.firstName = firstName
+        viewState.showValidationError(UserAddView.Line.FIRST_NAME, false)
+    }
+
+    fun onSecondNameChanged(secondName: String) {
+        this.secondName = secondName
+        viewState.showValidationError(UserAddView.Line.SECOND_NAME, false)
+    }
+
+    fun onEmailChanged(email: String) {
+        this.email = email
+        viewState.showValidationError(UserAddView.Line.EMAIL, false)
     }
 
     private fun isFirstNameValid(firstName: String?): Boolean {
@@ -73,6 +94,7 @@ class UserAddPresenter @Inject constructor(
             true
         }
     }
+
     private fun isEmailValid(email: String): Boolean {
         return if (!emailValidar.isEmailValid(email)) {
             viewState.showValidationError(

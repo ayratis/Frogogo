@@ -1,7 +1,6 @@
 package com.ayratis.frogogo.repository
 
 import com.ayratis.frogogo.data.Api
-import com.ayratis.frogogo.di.UserId
 import com.ayratis.frogogo.entity.User
 import com.ayratis.frogogo.entity.UserPost
 import com.ayratis.frogogo.system.SchedulersProvider

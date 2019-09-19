@@ -6,6 +6,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.ayratis.frogogo.R
 import com.ayratis.frogogo.extension.hideKeyboard
+import com.ayratis.frogogo.extension.onTextChanges
 import com.ayratis.frogogo.presentation.user_add.UserAddPresenter
 import com.ayratis.frogogo.presentation.user_add.UserAddView
 import com.ayratis.frogogo.ui._base.BaseFragment
@@ -29,23 +30,19 @@ class UserAddFragment : BaseFragment(), UserAddView {
             }
             inflateMenu(R.menu.menu_accept)
             setOnMenuItemClickListener {
-                presenter.onAcceptClick(
-                    firstNameEditText.text.toString(),
-                    secondNameEditText.text.toString(),
-                    emailEditText.text.toString()
-                )
+                presenter.onAcceptClick()
                 true
             }
         }
 
         emailEditText.setOnEditorActionListener { _, _, _ ->
-            presenter.onAcceptClick(
-                firstNameEditText.text.toString(),
-                secondNameEditText.text.toString(),
-                emailEditText.text.toString()
-            )
+            presenter.onAcceptClick()
             true
         }
+
+        firstNameEditText.onTextChanges { text -> presenter.onFirstNameChanged(text) }
+        secondNameEditText.onTextChanges { text -> presenter.onSecondNameChanged(text) }
+        emailEditText.onTextChanges { text -> presenter.onEmailChanged(text) }
     }
 
     override fun showValidationError(line: UserAddView.Line, show: Boolean, message: String?) {

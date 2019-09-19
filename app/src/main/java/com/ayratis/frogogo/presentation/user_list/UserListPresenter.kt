@@ -24,7 +24,7 @@ class UserListPresenter @Inject constructor(
     }
 
     fun onItemClick(user: User) {
-
+        router.navigateTo(Screens.UserEdit(user))
     }
 
     fun onAddFabClick() {

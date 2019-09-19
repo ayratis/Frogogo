@@ -6,4 +6,4 @@ import javax.inject.Qualifier
 annotation class BaseUrl
 
 @Qualifier
-annotation class UserId
+annotation class UserToEdit
