@@ -10,4 +10,7 @@
     <string name="edit">Изменить</string>
     <string name="should_not_be_empty">Строка не должна быть пустой</string>
     <string name="email_validation_error">Некорректная эл. почта</string>
+    <string name="success_add_message">Пользователь успешно добавлен!</string>
+    <string name="success_edit_message">Пользователь успешно редактирован!</string>
+    <string name="ok">OK</string>
 </resources>

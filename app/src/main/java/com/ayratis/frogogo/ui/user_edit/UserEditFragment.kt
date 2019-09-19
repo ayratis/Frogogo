@@ -1,5 +1,6 @@
 package com.ayratis.frogogo.ui.user_edit
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -105,6 +106,16 @@ class UserEditFragment : BaseFragment(), UserEditView {
 
     override fun hideKeyboard() {
         activity?.hideKeyboard()
+    }
+
+    override fun showSuccessDialog() {
+        AlertDialog.Builder(context)
+            .setMessage(getString(R.string.success_edit_message))
+            .setPositiveButton(getString(R.string.ok)) { dialogInterface, _ ->
+                dialogInterface.dismiss()
+            }
+            .create()
+            .show()
     }
 
     companion object {

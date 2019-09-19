@@ -39,6 +39,7 @@ class UserAddPresenter @Inject constructor(
                     {
                         viewState.enableUi(true)
                         viewState.showLoadingProgress(false)
+                        viewState.showSuccessDialog()
                     },
                     {
                         viewState.enableUi(true)

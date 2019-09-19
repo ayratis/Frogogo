@@ -21,4 +21,5 @@ interface UserEditView : MvpView {
     fun showLoadingProgress(show: Boolean)
     fun enableUi(enable: Boolean)
     fun hideKeyboard()
+    fun showSuccessDialog()
 }

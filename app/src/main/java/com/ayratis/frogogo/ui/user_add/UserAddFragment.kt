@@ -1,5 +1,6 @@
 package com.ayratis.frogogo.ui.user_add
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -79,5 +80,15 @@ class UserAddFragment : BaseFragment(), UserAddView {
 
     override fun onBackPressed() {
         presenter.onBackPressed()
+    }
+
+    override fun showSuccessDialog() {
+        AlertDialog.Builder(context)
+            .setMessage(getString(R.string.success_add_message))
+            .setPositiveButton(getString(R.string.ok)) { dialogInterface, _ ->
+                dialogInterface.dismiss()
+            }
+            .create()
+            .show()
     }
 }

@@ -48,6 +48,7 @@ class UserEditPresenter @Inject constructor(
                     {
                         viewState.enableUi(true)
                         viewState.showLoadingProgress(false)
+                        viewState.showSuccessDialog()
                     },
                     {
                         viewState.enableUi(true)
@@ -56,7 +57,6 @@ class UserEditPresenter @Inject constructor(
                 ).connect()
         }
     }
-
 
     fun onBackPressed() {
         router.exit()
