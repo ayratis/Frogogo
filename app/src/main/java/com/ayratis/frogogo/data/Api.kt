@@ -7,12 +7,12 @@ import retrofit2.http.*
 
 interface Api {
 
-    @GET("users")
+    @GET("users.json")
     fun getUserList(): Single<List<User>>
 
-    @POST("users")
+    @POST("users.json")
     fun addUser(@Body body: UserPost): Single<User>
 
-    @PATCH("users/{id}")
-    fun editUser(@Path("id") id: Int, @Body body: UserPost): Single<User>
+    @PATCH("users/{id}.json")
+    fun editUser(@Path("id") id: Long, @Body body: UserPost): Single<User>
 }
