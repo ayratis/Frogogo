@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.annotation.LayoutRes
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 
 fun Any.objectScopeName() = "${javaClass.simpleName}_${hashCode()}"
@@ -38,4 +39,8 @@ fun EditText.onTextChanges(onChange: (String) -> Unit) {
         }
 
     })
+}
+
+fun Context.color(colorId: Int): Int {
+    return ContextCompat.getColor(this, colorId)
 }

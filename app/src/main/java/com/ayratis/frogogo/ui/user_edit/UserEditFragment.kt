@@ -4,8 +4,14 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.transition.Fade
+import android.transition.TransitionInflater
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.ayratis.frogogo.R
@@ -16,7 +22,9 @@ import com.ayratis.frogogo.extension.hideKeyboard
 import com.ayratis.frogogo.extension.onTextChanges
 import com.ayratis.frogogo.presentation.user_edit.UserEditPresenter
 import com.ayratis.frogogo.presentation.user_edit.UserEditView
+import com.ayratis.frogogo.ui.AppActivity
 import com.ayratis.frogogo.ui._base.BaseFragment
+import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_user_edit.*
 import toothpick.Scope
@@ -44,18 +52,37 @@ class UserEditFragment : BaseFragment(), UserEditView {
         )
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_accept, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_accept) presenter.onAcceptClick()
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(R.transition.default_transition)
+        enterTransition = Fade().apply {
+            duration += 300
+            interpolator = FastOutSlowInInterpolator()
+        }
+        exitTransition = null
+        returnTransition = null
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        toolbar.apply {
-            setNavigationOnClickListener {
-                presenter.onBackPressed()
-            }
-            inflateMenu(R.menu.menu_accept)
-            setOnMenuItemClickListener {
-                presenter.onAcceptClick()
-                true
-            }
-        }
+        setHasOptionsMenu(true)
+        (activity as? AppActivity)?.showBackNavButton(true)
+        activity?.setTitle(R.string.edit)
+        avatarImageView.transitionName = user.toString()
+        Glide.with(avatarImageView)
+            .load(user.avatarUrl)
+            .placeholder(R.drawable.ic_person)
+            .into(avatarImageView)
 
         emailEditText.setOnEditorActionListener { _, _, _ ->
             presenter.onAcceptClick()
@@ -85,7 +112,6 @@ class UserEditFragment : BaseFragment(), UserEditView {
         firstNameEditText.isEnabled = enable
         secondNameEditText.isEnabled = enable
         emailEditText.isEnabled = enable
-        toolbar.isEnabled = enable
     }
 
     override fun showValidationError(line: UserEditView.Line, show: Boolean, message: String?) {

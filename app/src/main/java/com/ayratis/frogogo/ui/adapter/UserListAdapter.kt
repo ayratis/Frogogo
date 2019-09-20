@@ -2,6 +2,8 @@ package com.ayratis.frogogo.ui.adapter
 
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ayratis.frogogo.R
@@ -12,7 +14,7 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_user.*
 
 class UserListAdapter(
-    private val onItemClickListener: (User) -> Unit
+    private val onItemClickListener: (User, View) -> Unit
 ) : RecyclerView.Adapter<UserListAdapter.ViewHolder>() {
 
     private val items = ArrayList<User>()
@@ -59,14 +61,16 @@ class UserListAdapter(
     ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
         private lateinit var user: User
+        private lateinit var avatar: ImageView
 
         init {
-            containerView.setOnClickListener { onItemClickListener.invoke(user) }
+            containerView.setOnClickListener { onItemClickListener.invoke(user, avatarImageView) }
         }
 
         fun bind(user: User) {
             this.user = user
 
+            avatar = containerView.findViewById(R.id.avatarImageView)
             nameTextView.text = nameTextView.context.getString(
                 R.string.user_name_s_s,
                 user.firstName,
@@ -75,10 +79,12 @@ class UserListAdapter(
 
             emailTextView.text = user.email
 
-            Glide.with(avatarImageView.context)
+            ViewCompat.setTransitionName(avatar, user.toString())
+
+            Glide.with(avatar.context)
                 .load(user.avatarUrl)
                 .placeholder(R.drawable.ic_person)
-                .into(avatarImageView)
+                .into(avatar)
         }
     }
 }

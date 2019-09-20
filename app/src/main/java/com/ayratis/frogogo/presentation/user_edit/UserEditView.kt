@@ -17,10 +17,18 @@ interface UserEditView : MvpView {
     @StateStrategyType(OneExecutionStateStrategy::class)
     fun showUserData(firstName: String, secondName: String, email: String)
 
+    @StateStrategyType(OneExecutionStateStrategy::class)
     fun showValidationError(line: Line, show: Boolean, message: String? = null)
+
     fun showLoadingProgress(show: Boolean)
     fun enableUi(enable: Boolean)
+
+    @StateStrategyType(OneExecutionStateStrategy::class)
     fun hideKeyboard()
+
+    @StateStrategyType(OneExecutionStateStrategy::class)
     fun showSuccessDialog()
+
+    @StateStrategyType(OneExecutionStateStrategy::class)
     fun showMessage(message: String?)
 }

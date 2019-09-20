@@ -6,6 +6,7 @@ import com.ayratis.frogogo.entity.User
 import com.ayratis.frogogo.presentation._base.BasePresenter
 import com.ayratis.frogogo.repository.UserListRepository
 import com.ayratis.frogogo.system.ErrorHandler
+import com.ayratis.frogogo.ui._base.RevealAnimationSetting
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
@@ -29,8 +30,8 @@ class UserListPresenter @Inject constructor(
         router.navigateTo(Screens.UserEdit(user))
     }
 
-    fun onAddFabClick() {
-        router.navigateTo(Screens.UserAdd)
+    fun onAddFabClick(revealAnimationSetting: RevealAnimationSetting) {
+        router.navigateTo(Screens.UserAdd(revealAnimationSetting))
     }
 
     private fun loadUsers() {

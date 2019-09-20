@@ -6,16 +6,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <androidx.appcompat.widget.Toolbar
-            app:title="@string/user_list"
-            android:layout_width="match_parent"
-            app:titleTextColor="@color/white"
-            android:background="@color/colorPrimary"
-            android:layout_height="?attr/actionBarSize"/>
-    </com.google.android.material.appbar.AppBarLayout>
+
+<!--    <com.google.android.material.appbar.AppBarLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
+<!--        <androidx.appcompat.widget.Toolbar-->
+<!--            app:title="@string/user_list"-->
+<!--            android:layout_width="match_parent"-->
+<!--            app:titleTextColor="@color/textAccentColor"-->
+<!--            android:background="@color/white"-->
+<!--            android:layout_height="?attr/actionBarSize"/>-->
+<!--    </com.google.android.material.appbar.AppBarLayout>-->
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
@@ -24,6 +25,7 @@
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="1dp"
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
