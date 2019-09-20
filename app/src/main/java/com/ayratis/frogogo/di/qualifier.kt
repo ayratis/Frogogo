@@ -7,3 +7,6 @@ annotation class BaseUrl
 
 @Qualifier
 annotation class UserToEdit
+
+@Qualifier
+annotation class AnimateFab

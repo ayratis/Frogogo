@@ -41,9 +41,10 @@ object AnimationUtils {
                 val height = revealSettings.height.toDouble()
                 val duration = context.resources.getInteger(android.R.integer.config_mediumAnimTime)
 
+                val initRadius = revealSettings.minRadius.toFloat()
                 val finalRadius = sqrt(width * width + height * height).toFloat()
                 val anim = ViewAnimationUtils
-                    .createCircularReveal(p0, cx, cy, 0f, finalRadius)
+                    .createCircularReveal(p0, cx, cy, initRadius, finalRadius)
                     .apply {
                         this.duration = duration.toLong()
                         interpolator = FastOutSlowInInterpolator()
@@ -83,12 +84,13 @@ object AnimationUtils {
         val duration = context.resources.getInteger(android.R.integer.config_mediumAnimTime)
 
         val initRadius = sqrt(width * width + height * height).toFloat()
-        val anim = ViewAnimationUtils.createCircularReveal(view, cx, cy, initRadius, 0f)
+        val endRadius = revealSettings.minRadius.toFloat()
+        val anim = ViewAnimationUtils.createCircularReveal(view, cx, cy, initRadius, endRadius)
         anim.duration = duration.toLong()
         anim.interpolator = FastOutSlowInInterpolator()
         anim.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
-                view.visibility = View.GONE
+//                view.visibility = View.GONE
                 listener.invoke()
             }
         })
@@ -104,5 +106,6 @@ data class RevealAnimationSetting(
     val centerX: Int,
     val centerY: Int,
     val width: Int,
-    val height: Int
+    val height: Int,
+    val minRadius: Int
 ) : Parcelable

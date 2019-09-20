@@ -62,6 +62,7 @@ class UserEditPresenter @Inject constructor(
     }
 
     fun onBackPressed() {
+        viewState.hideKeyboard()
         router.exit()
     }
 

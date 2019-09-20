@@ -73,6 +73,7 @@ class UserEditFragment : BaseFragment(), UserEditView {
         returnTransition = null
     }
 
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setHasOptionsMenu(true)

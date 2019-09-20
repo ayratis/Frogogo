@@ -42,19 +42,18 @@ class UserAddFragment : BaseFragment(), UserAddView {
         )
     }
 
-    private fun dismiss(listener: () -> Unit) {
-        context?.run {
-            AnimationUtils.startCircularRevealExitAnimation(
-                this,
-                view,
-                revealAnimationSetting,
-                color(R.color.white),
-                color(R.color.colorAccent),
-                listener
-            )
-
-        }
-    }
+//    private fun dismiss(listener: () -> Unit) {
+//        context?.run {
+//            AnimationUtils.startCircularRevealExitAnimation(
+//                this,
+//                view,
+//                revealAnimationSetting,
+//                color(R.color.white),
+//                color(R.color.colorAccent),
+//                listener
+//            )
+//        }
+//    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_accept, menu)
@@ -114,7 +113,8 @@ class UserAddFragment : BaseFragment(), UserAddView {
     }
 
     override fun onBackPressed() {
-        dismiss{ presenter.onBackPressed() }
+        presenter.onBackPressed()
+//        dismiss{ presenter.onBackPressed() }
     }
 
     override fun showSuccessDialog() {

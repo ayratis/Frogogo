@@ -22,6 +22,8 @@ class UserListPresenter @Inject constructor(
         loadUsers()
     }
 
+    var animateFab: Boolean = false
+
     fun onRefresh() {
         loadUsers()
     }
