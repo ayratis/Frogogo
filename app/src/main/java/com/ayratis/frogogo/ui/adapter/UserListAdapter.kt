@@ -61,7 +61,6 @@ class UserListAdapter(
     ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
         private lateinit var user: User
-        private lateinit var avatar: ImageView
 
         init {
             containerView.setOnClickListener { onItemClickListener.invoke(user, avatarImageView) }
@@ -70,21 +69,19 @@ class UserListAdapter(
         fun bind(user: User) {
             this.user = user
 
-            avatar = containerView.findViewById(R.id.avatarImageView)
+            avatarImageView.transitionName = user.id.toString()
+
             nameTextView.text = nameTextView.context.getString(
                 R.string.user_name_s_s,
                 user.firstName,
                 user.lastName
             )
-
             emailTextView.text = user.email
 
-            ViewCompat.setTransitionName(avatar, user.toString())
-
-            Glide.with(avatar.context)
+            Glide.with(avatarImageView.context)
                 .load(user.avatarUrl)
                 .placeholder(R.drawable.ic_person)
-                .into(avatar)
+                .into(avatarImageView)
         }
     }
 }

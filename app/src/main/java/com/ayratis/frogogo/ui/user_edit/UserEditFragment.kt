@@ -78,7 +78,7 @@ class UserEditFragment : BaseFragment(), UserEditView {
         setHasOptionsMenu(true)
         (activity as? AppActivity)?.showBackNavButton(true)
         activity?.setTitle(R.string.edit)
-        avatarImageView.transitionName = user.toString()
+        avatarImageView.transitionName = user.id.toString()
         Glide.with(avatarImageView)
             .load(user.avatarUrl)
             .placeholder(R.drawable.ic_person)

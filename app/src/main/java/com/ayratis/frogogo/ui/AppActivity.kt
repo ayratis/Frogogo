@@ -64,7 +64,6 @@ class AppActivity : AppCompatActivity() {
                 fragmentTransaction.addSharedElement(view, transitionName)
             }
         }
-
     }
 
 

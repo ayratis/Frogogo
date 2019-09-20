@@ -68,6 +68,24 @@ class UserListFragment : BaseFragment(), UserListView {
                 )
             )
         }
+
+        postponeEnterTransition()
+        recyclerView.addOnLayoutChangeListener(object : View.OnLayoutChangeListener {
+            override fun onLayoutChange(
+                v: View,
+                left: Int,
+                top: Int,
+                right: Int,
+                bottom: Int,
+                oldLeft: Int,
+                oldTop: Int,
+                oldRight: Int,
+                oldBottom: Int
+            ) {
+                recyclerView.removeOnLayoutChangeListener(this)
+                startPostponedEnterTransition()
+            }
+        })
     }
 
     override fun showLoading(show: Boolean) {
